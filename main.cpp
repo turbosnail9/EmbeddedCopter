@@ -39,24 +39,29 @@ int sc_main(int argc, char* argv[]) {
 
 	/** Intern **/
 
+	//Comm
 	sc_signal<bool> connected;
 	sc_signal<sc_uint<8> > internal_command;
 	sc_signal<sc_uint<8> > internal_command_arg1;
 	sc_signal<sc_uint<8> > internal_command_arg2;
 	sc_signal<sc_uint<8> > internal_command_arg3;
 
+	//Batt
 	sc_signal<bool> batt_warning;
 
+	//Pos
 	sc_signal<sc_uint<8> > x_pos_internal;
 	sc_signal<sc_uint<8> > y_pos_internal;
 	sc_signal<sc_uint<8> > z_pos_internal;
 
+	//Prox
+	sc_signal<sc_uint<3> > prox_warning;
+
+	//Move
 	sc_signal<sc_uint<8> > x_dest;
 	sc_signal<sc_uint<8> > y_dest;
 	sc_signal<sc_uint<8> > z_dest;
-
-	sc_signal<sc_uint<3> > prox_warning;
-
+	
 	sc_signal<sc_int<8> > x_move_vect;
 	sc_signal<sc_int<8> > y_move_vect;
 	sc_signal<sc_int<8> > z_move_vect;
@@ -155,10 +160,55 @@ int sc_main(int argc, char* argv[]) {
 	/** VCD File **/
 
 	sc_trace_file *wf = sc_create_vcd_trace_file("trace");
-	sc_trace(wf, batt_trig, "clock");
+
+	/** Extern **/
+
 	sc_trace(wf, reset, "reset");
-	sc_trace(wf, batt_warning, "warning");
+	//Battery
 	sc_trace(wf, level_change, "level_change");
+	sc_trace(wf, batt_trig, "batt_trig");
+	//Prox
+	sc_trace(wf, prox_input, "prox_input");
+	//Pos
+	sc_trace(wf, x_pos, "x_pos");
+	sc_trace(wf, y_pos, "y_pos");
+	sc_trace(wf, z_pos, "z_pos");
+	//Motor
+	sc_trace(wf, motor_clk, "motor_clk");
+	//Comm
+	sc_trace(wf, signal_quality, "reset");
+	sc_trace(wf, external_command, "external_command");
+	sc_trace(wf, external_command_arg1, "external_command_arg1");
+	sc_trace(wf, external_command_arg2, "external_command_arg2");
+	sc_trace(wf, external_command_arg3, "external_command_arg3");
+
+	/** Intern **/
+
+	sc_trace(wf, connected, "connected");
+	sc_trace(wf, internal_command, "internal_command");
+	sc_trace(wf, internal_command_arg1, "internal_command_arg1");
+	sc_trace(wf, internal_command_arg2, "internal_command_arg2");
+	sc_trace(wf, internal_command_arg3, "internal_command_arg3");
+
+	sc_trace(wf, batt_warning, "batt_warning");
+
+	sc_trace(wf, x_pos_internal, "x_pos_internal");
+	sc_trace(wf, y_pos_internal, "y_pos_internal");
+	sc_trace(wf, z_pos_internal, "z_pos_internal");
+
+	sc_trace(wf, x_dest, "x_dest");
+	sc_trace(wf, y_dest, "y_dest");
+	sc_trace(wf, z_dest, "z_dest");
+
+	sc_trace(wf, prox_warning, "prox_warning");
+
+	sc_trace(wf, x_move_vect, "x_move_vect");
+	sc_trace(wf, y_move_vect, "y_move_vect");
+	sc_trace(wf, z_move_vect, "z_move_vect");
+
+	sc_trace(wf, x_delta, "x_delta");
+	sc_trace(wf, y_delta, "y_delta");
+	sc_trace(wf, z_delta, "z_delta");
 
 	/** Simulation **/
 
