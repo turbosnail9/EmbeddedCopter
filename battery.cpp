@@ -1,7 +1,7 @@
 #include "systemc.h"
 
 SC_MODULE(battery) {
-	sc_in_clk clock;
+	sc_in_clk trig;
 	sc_in<bool> reset;
 	sc_in<sc_uint<8> > level_change;
 
@@ -25,7 +25,7 @@ SC_MODULE(battery) {
 		SC_METHOD(flush);
 		sensitive << reset.pos();
 		SC_METHOD(level_changed);
-		sensitive << clock.pos();
+		sensitive << trig.pos();
 	}
 
 };

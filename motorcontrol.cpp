@@ -7,9 +7,9 @@ SC_MODULE(motorcontrol) {
 	sc_in<sc_uint<8> > y_pos;
 	sc_in<sc_uint<8> > z_pos;
 
-	sc_in<sc_uint<8> > x_des;
-	sc_in<sc_uint<8> > y_des;
-	sc_in<sc_uint<8> > z_des;
+	sc_in<sc_uint<8> > x_dest;
+	sc_in<sc_uint<8> > y_dest;
+	sc_in<sc_uint<8> > z_dest;
 
 	sc_out<sc_int<8> > x_move_vect;
 	sc_out<sc_int<8> > y_move_vect;
@@ -22,9 +22,9 @@ SC_MODULE(motorcontrol) {
 	}
 
 	void update() {
-		x_move_vect.write(x_des.read()-x_pos.read());
-		y_move_vect.write(y_des.read()-y_pos.read());
-		z_move_vect.write(z_des.read()-z_pos.read());
+		x_move_vect.write(x_dest.read()-x_pos.read());
+		y_move_vect.write(y_dest.read()-y_pos.read());
+		z_move_vect.write(z_dest.read()-z_pos.read());
 	}
 
 	SC_CTOR(motorcontrol) {
@@ -35,9 +35,9 @@ SC_MODULE(motorcontrol) {
 		sensitive << x_pos;
 		sensitive << y_pos;
 		sensitive << z_pos;
-		sensitive << x_des;
-		sensitive << y_des;
-		sensitive << z_des;
+		sensitive << x_dest;
+		sensitive << y_dest;
+		sensitive << z_dest;
 	}
 
 };
