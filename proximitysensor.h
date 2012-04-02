@@ -1,0 +1,14 @@
+#ifndef EMBEDDED_PROXSENSOR
+#define EMBEDDED_PROXSENSOR
+
+typedef enum {
+	NO_WARNING = 0,
+	UP_WARNING = 1,
+	DOWN_WARNING = 2,
+	LEFT_WARNING = 3,
+	RIGHT_WARNING = 4,
+	FRONT_WARNING = 5,
+	BACK_WARNING = 6
+} prox_warn_t;
+
+#endif
